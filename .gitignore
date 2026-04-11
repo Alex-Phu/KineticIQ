@@ -1,0 +1,12 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.task
+backend/uploads/
+*.pyc
+
+# Node
+frontend/node_modules/
+
+# Mac
+.DS_Store
