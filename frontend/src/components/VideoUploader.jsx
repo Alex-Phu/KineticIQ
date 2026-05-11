@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 const ACTIVITIES = [
   { id: "tennis_forehand", label: "Tennis Forehand" },
   { id: "tennis_serve", label: "Tennis Serve" },
-  { id: "squat", label: "Barbell Squat" },
-  { id: "running", label: "Running Form" },
+  { id: "golf_swing", label: "Golf Swing" },
+  { id: "golf_putt", label: "Golf Putt" },
 ];
 
 export default function VideoUploader({ onAnalyze, error }) {
@@ -27,7 +27,7 @@ export default function VideoUploader({ onAnalyze, error }) {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    setDragOver(false);
+    setDragOver(false)
     const file = e.dataTransfer.files[0];
     handleFile(file);
   };

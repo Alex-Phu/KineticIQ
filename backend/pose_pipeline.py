@@ -13,7 +13,7 @@ import mediapipe as mp
 from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python.vision import PoseLandmarker, PoseLandmarkerOptions, RunningMode
 
-# MediaPipe landmark indices we care about
+#MEDIAPIPE LABELLS
 LANDMARK_NAMES = {
     0:  "nose",
     11: "left_shoulder",
