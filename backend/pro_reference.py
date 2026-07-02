@@ -158,12 +158,17 @@ def compare_to_pro(user_metrics: Dict, pro_ref: Dict) -> Dict[str, Any]:
 
         # Score: full score if within pro range, degrades beyond
         half_range = pro_range / 2
+
         if deviation <= half_range:
-            joint_score = 100 - (deviation / half_range) * 20  # 80–100
+            # Close-ish to pro → 70–90 (not 80–100)
+            joint_score = 90 - (deviation / half_range) * 20   # 70–90
         elif deviation <= pro_range:
-            joint_score = 80 - ((deviation - half_range) / half_range) * 30  # 50–80
+            # In pro range but off → 40–70
+            joint_score = 70 - ((deviation - half_range) / half_range) * 30  # 40–70
         else:
-            joint_score = max(0, 50 - (deviation - pro_range) * 1.5)
+            # Outside pro range → fall off hard
+            joint_score = max(0, 40 - (deviation - pro_range) * 2.0)
+
 
         joint_score = round(joint_score)
 
@@ -198,7 +203,7 @@ def compare_to_pro(user_metrics: Dict, pro_ref: Dict) -> Dict[str, Any]:
 
 
     # Overall score: weighted average (all equal weight for MVP)
-    overall_score = round(sum(max(s, 40) for s in scores) / len(scores)) if scores else 50
+    overall_score = round(sum(scores) / len(scores)) if scores else 50
 
     return {
         "overall_score": overall_score,
@@ -208,10 +213,10 @@ def compare_to_pro(user_metrics: Dict, pro_ref: Dict) -> Dict[str, Any]:
 
 
 def score_to_grade(score: int) -> str:
-    if score >= 90: return "Elite"
-    if score >= 75: return "Advanced"
-    if score >= 60: return "Intermediate"
-    if score >= 45: return "Beginner"
+    if score >= 95: return "Elite"
+    if score >= 85: return "Advanced"
+    if score >= 70: return "Intermediate"
+    if score >= 50: return "Beginner"
     return "Needs Work"
 
 
